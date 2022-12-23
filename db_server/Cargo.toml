@@ -1,0 +1,23 @@
+[package]
+name = "db_server"
+version = "1.0.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bs58 = "0.4.0"
+sha2 = "0.10.6"
+ed25519 = "1.5.2"
+
+[dependencies.signatory]
+version = "0.26.0"
+features = ["ed25519"]
+
+[dependencies.ed25519-dalek]
+version = "1.0.1"
+features = ["rand"]
+
+[dependencies.rand_core]
+version = "0.5.1"
+features = ["getrandom", "alloc", "std"]

@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "db_server",
+    "db_client",
+]
