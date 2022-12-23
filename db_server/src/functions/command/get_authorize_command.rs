@@ -6,6 +6,9 @@ pub fn get_authorize_command(message: &[u8]) -> Command {
     // Get tokens
     let mut tokens = split(message, b'\x0A');
 
+    // Drop AUTHORIZE BY
+    tokens.pop().unwrap();
+
     // Get permission
     let permission = tokens.pop().unwrap();
     let permission = get_permission_value(permission.as_slice()).unwrap();
@@ -28,8 +31,7 @@ fn get_permission_value(token: &[u8]) -> Result<Permission, GetPermissionValueEr
     }
 
     // We expect MASTER | APPLICATION | READER, otherwise throw error.
-    let token = tokens.get(1).unwrap();
-    let token = String::from_utf8_lossy(split(token, b'"').get(1).unwrap()).to_string();
+    let token = String::from_utf8_lossy(tokens.get(1).unwrap()).to_string();
     if token.eq("MASTER") {
         return Ok(Permission::Master)
     } else if token.eq("APPLICATION") {
